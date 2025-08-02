@@ -1,13 +1,22 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, User, Menu, Bell } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 export const Header = () => {
+  const location = useLocation();
+  
+  const isActive = (path: string) => {
+    if (path === '/' && location.pathname === '/') return true;
+    if (path !== '/' && location.pathname.startsWith(path)) return true;
+    return false;
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-r from-primary to-accent">
               <TrendingUp className="h-5 w-5 text-primary-foreground" />
             </div>
@@ -17,22 +26,42 @@ export const Header = () => {
             <Badge variant="secondary" className="ml-2 hidden sm:inline-flex">
               AI-Powered
             </Badge>
-          </div>
+          </Link>
         </div>
 
         <nav className="hidden md:flex items-center gap-6">
-          <a href="#dashboard" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+          <Link 
+            to="/dashboard" 
+            className={`text-sm font-medium transition-colors ${
+              isActive('/dashboard') ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
+            }`}
+          >
             Dashboard
-          </a>
-          <a href="#portfolio" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+          </Link>
+          <Link 
+            to="/portfolio" 
+            className={`text-sm font-medium transition-colors ${
+              isActive('/portfolio') ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
+            }`}
+          >
             Portfolio
-          </a>
-          <a href="#insights" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+          </Link>
+          <Link 
+            to="/insights" 
+            className={`text-sm font-medium transition-colors ${
+              isActive('/insights') ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
+            }`}
+          >
             AI Insights
-          </a>
-          <a href="#news" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+          </Link>
+          <Link 
+            to="/news" 
+            className={`text-sm font-medium transition-colors ${
+              isActive('/news') ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
+            }`}
+          >
             News
-          </a>
+          </Link>
         </nav>
 
         <div className="flex items-center gap-3">

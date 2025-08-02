@@ -1,0 +1,98 @@
+import { MarketOverview } from "@/components/MarketOverview";
+import { PortfolioPreview } from "@/components/PortfolioPreview";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { TrendingUp, BarChart3, PieChart, Activity } from "lucide-react";
+
+const Dashboard = () => {
+  return (
+    <div className="min-h-screen bg-background pt-4">
+      <div className="container mx-auto px-4 space-y-8">
+        {/* Dashboard Header */}
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold">Dashboard</h1>
+              <p className="text-muted-foreground">Your financial overview at a glance</p>
+            </div>
+            <Badge variant="outline" className="border-primary/20 text-primary bg-primary/10">
+              <Activity className="w-3 h-3 mr-1" />
+              Live Updates
+            </Badge>
+          </div>
+        </div>
+
+        {/* Key Metrics */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <Card className="financial-card p-6 text-center">
+            <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <TrendingUp className="w-6 h-6 text-primary" />
+            </div>
+            <h3 className="font-semibold text-lg">Portfolio Value</h3>
+            <p className="text-2xl font-bold text-primary">$150,000</p>
+            <p className="text-sm text-success">+$12,450 (9.06%)</p>
+          </Card>
+
+          <Card className="financial-card p-6 text-center">
+            <div className="w-12 h-12 bg-success/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <BarChart3 className="w-6 h-6 text-success" />
+            </div>
+            <h3 className="font-semibold text-lg">Today's P&L</h3>
+            <p className="text-2xl font-bold text-success">+$2,340</p>
+            <p className="text-sm text-success">+1.58%</p>
+          </Card>
+
+          <Card className="financial-card p-6 text-center">
+            <div className="w-12 h-12 bg-warning/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <PieChart className="w-6 h-6 text-warning" />
+            </div>
+            <h3 className="font-semibold text-lg">Asset Classes</h3>
+            <p className="text-2xl font-bold text-warning">6</p>
+            <p className="text-sm text-muted-foreground">Well diversified</p>
+          </Card>
+
+          <Card className="financial-card p-6 text-center">
+            <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <Activity className="w-6 h-6 text-accent" />
+            </div>
+            <h3 className="font-semibold text-lg">Open Positions</h3>
+            <p className="text-2xl font-bold text-accent">24</p>
+            <p className="text-sm text-muted-foreground">Active trades</p>
+          </Card>
+        </div>
+
+        {/* Market Overview Section */}
+        <MarketOverview />
+
+        {/* Portfolio Preview */}
+        <PortfolioPreview />
+
+        {/* Quick Actions */}
+        <Card className="financial-card p-6">
+          <h3 className="text-xl font-semibold mb-4">Quick Actions</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <Button variant="financial" className="h-16 flex-col">
+              <TrendingUp className="w-5 h-5 mb-1" />
+              Buy Stock
+            </Button>
+            <Button variant="outline" className="h-16 flex-col">
+              <BarChart3 className="w-5 h-5 mb-1" />
+              Analyze
+            </Button>
+            <Button variant="outline" className="h-16 flex-col">
+              <PieChart className="w-5 h-5 mb-1" />
+              Rebalance
+            </Button>
+            <Button variant="success" className="h-16 flex-col">
+              <Activity className="w-5 h-5 mb-1" />
+              AI Advice
+            </Button>
+          </div>
+        </Card>
+      </div>
+    </div>
+  );
+};
+
+export default Dashboard;
