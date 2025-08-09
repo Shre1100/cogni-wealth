@@ -47,9 +47,9 @@ export const Footer = () => {
           <div className="space-y-4">
             <h3 className="font-semibold">Resources</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground transition-colors">Documentation</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">API Reference</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Help Center</a></li>
+              <li><a href="/documentation" className="hover:text-foreground transition-colors">Documentation</a></li>
+              <li><a href="/documentation" className="hover:text-foreground transition-colors">API Reference</a></li>
+              <li><a href="/help" className="hover:text-foreground transition-colors">Help Center</a></li>
               <li><a href="#" className="hover:text-foreground transition-colors">Blog</a></li>
             </ul>
           </div>
@@ -72,9 +72,9 @@ export const Footer = () => {
             © 2024 CogniWealth. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm text-muted-foreground">
-            <a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-foreground transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-foreground transition-colors">Disclaimer</a>
+            <a href="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</a>
+            <a href="/terms" className="hover:text-foreground transition-colors">Terms of Service</a>
+            <a href="/terms" className="hover:text-foreground transition-colors">Disclaimer</a>
           </div>
         </div>
 

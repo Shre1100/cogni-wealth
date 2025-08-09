@@ -8,6 +8,12 @@ import Dashboard from "./pages/Dashboard";
 import Portfolio from "./pages/Portfolio";
 import Insights from "./pages/Insights";
 import News from "./pages/News";
+import Profile from "./pages/Profile";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Documentation from "./pages/Documentation";
+import HelpCenter from "./pages/HelpCenter";
+import TermsOfService from "./pages/TermsOfService";
 import NotFound from "./pages/NotFound";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -28,6 +34,13 @@ const App = () => (
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/insights" element={<Insights />} />
             <Route path="/news" element={<News />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/documentation" element={<Documentation />} />
+            <Route path="/help" element={<HelpCenter />} />
+            <Route path="/terms" element={<TermsOfService />} />
+            <Route path="/privacy" element={<TermsOfService />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

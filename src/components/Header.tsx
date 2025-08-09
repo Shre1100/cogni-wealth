@@ -4,11 +4,13 @@ import { TrendingUp, User, Menu, Bell } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { NotificationsSidebar } from "@/components/NotificationsSidebar";
 
 export const Header = () => {
   const location = useLocation();
   const { toast } = useToast();
   const [notificationCount, setNotificationCount] = useState(3);
+  const [showNotifications, setShowNotifications] = useState(false);
   
   const isActive = (path: string) => {
     if (path === '/' && location.pathname === '/') return true;
@@ -17,18 +19,12 @@ export const Header = () => {
   };
 
   const handleNotificationClick = () => {
-    toast({
-      title: "Notifications",
-      description: `You have ${notificationCount} new alerts: Market volatility detected, Portfolio rebalancing suggested, New AI insights available.`,
-    });
-    setNotificationCount(0);
+    setShowNotifications(true);
   };
 
   const handleProfileClick = () => {
-    toast({
-      title: "Profile Settings",
-      description: "Account: john@example.com | Risk Profile: Moderate | Portfolio Value: $125,430",
-    });
+    // Navigate to profile page
+    window.location.href = '/profile';
   };
 
   return (
@@ -99,6 +95,12 @@ export const Header = () => {
             <Menu className="h-4 w-4" />
           </Button>
         </div>
+
+        {/* Notifications Sidebar */}
+        <NotificationsSidebar 
+          open={showNotifications} 
+          onClose={() => setShowNotifications(false)} 
+        />
       </div>
     </header>
   );

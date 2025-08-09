@@ -261,32 +261,255 @@ const News = () => {
             </div>
           </TabsContent>
 
-          {/* Other tab contents would filter the news by category */}
-          <TabsContent value="earnings">
-            <div className="text-center py-12">
-              <Newspaper className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-              <p className="text-muted-foreground">Earnings news will be displayed here</p>
+          {/* Earnings Tab */}
+          <TabsContent value="earnings" className="space-y-6">
+            <div className="space-y-4">
+              {mockNews.filter(item => item.category === 'Earnings').map((item) => (
+                <Card key={item.id} className="financial-card p-6 hover:border-primary/30 transition-all">
+                  <div className="space-y-4">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1 space-y-2">
+                        <div className="flex items-center gap-3">
+                          <h3 className="font-semibold text-lg hover:text-primary cursor-pointer transition-colors">
+                            {item.title}
+                          </h3>
+                          <ExternalLink className="w-4 h-4 text-muted-foreground hover:text-primary cursor-pointer" />
+                        </div>
+                        <p className="text-muted-foreground">{item.summary}</p>
+                        
+                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                          <span className="font-medium">{item.source}</span>
+                          <div className="flex items-center gap-1">
+                            <Clock className="w-3 h-3" />
+                            {item.timestamp}
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="flex flex-col gap-3 items-end">
+                        <Button variant="ghost" size="icon">
+                          <BookmarkPlus className="w-4 h-4" />
+                        </Button>
+                        
+                        <div className="flex gap-2">
+                          <Badge variant="outline" className={getSentimentColor(item.sentiment)}>
+                            {getSentimentIcon(item.sentiment)}
+                            <span className="ml-1 capitalize">{item.sentiment}</span>
+                          </Badge>
+                          
+                          <Badge variant="outline" className={getImpactColor(item.impact)}>
+                            {item.impact} impact
+                          </Badge>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {item.relatedStocks.length > 0 && (
+                      <div className="pt-3 border-t border-border/40">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm text-muted-foreground">Related:</span>
+                          <div className="flex gap-2">
+                            {item.relatedStocks.map((stock) => (
+                              <Badge key={stock} variant="secondary" className="text-xs">
+                                {stock}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </Card>
+              ))}
             </div>
           </TabsContent>
 
-          <TabsContent value="economy">
-            <div className="text-center py-12">
-              <Newspaper className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-              <p className="text-muted-foreground">Economic news will be displayed here</p>
+          {/* Economy Tab */}
+          <TabsContent value="economy" className="space-y-6">
+            <div className="space-y-4">
+              {mockNews.filter(item => item.category === 'Economy').map((item) => (
+                <Card key={item.id} className="financial-card p-6 hover:border-primary/30 transition-all">
+                  <div className="space-y-4">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1 space-y-2">
+                        <div className="flex items-center gap-3">
+                          <h3 className="font-semibold text-lg hover:text-primary cursor-pointer transition-colors">
+                            {item.title}
+                          </h3>
+                          <ExternalLink className="w-4 h-4 text-muted-foreground hover:text-primary cursor-pointer" />
+                        </div>
+                        <p className="text-muted-foreground">{item.summary}</p>
+                        
+                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                          <span className="font-medium">{item.source}</span>
+                          <div className="flex items-center gap-1">
+                            <Clock className="w-3 h-3" />
+                            {item.timestamp}
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="flex flex-col gap-3 items-end">
+                        <Button variant="ghost" size="icon">
+                          <BookmarkPlus className="w-4 h-4" />
+                        </Button>
+                        
+                        <div className="flex gap-2">
+                          <Badge variant="outline" className={getSentimentColor(item.sentiment)}>
+                            {getSentimentIcon(item.sentiment)}
+                            <span className="ml-1 capitalize">{item.sentiment}</span>
+                          </Badge>
+                          
+                          <Badge variant="outline" className={getImpactColor(item.impact)}>
+                            {item.impact} impact
+                          </Badge>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {item.relatedStocks.length > 0 && (
+                      <div className="pt-3 border-t border-border/40">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm text-muted-foreground">Related:</span>
+                          <div className="flex gap-2">
+                            {item.relatedStocks.map((stock) => (
+                              <Badge key={stock} variant="secondary" className="text-xs">
+                                {stock}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </Card>
+              ))}
             </div>
           </TabsContent>
 
-          <TabsContent value="technology">
-            <div className="text-center py-12">
-              <Newspaper className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-              <p className="text-muted-foreground">Technology news will be displayed here</p>
+          {/* Technology Tab */}
+          <TabsContent value="technology" className="space-y-6">
+            <div className="space-y-4">
+              {mockNews.filter(item => item.category === 'Technology').map((item) => (
+                <Card key={item.id} className="financial-card p-6 hover:border-primary/30 transition-all">
+                  <div className="space-y-4">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1 space-y-2">
+                        <div className="flex items-center gap-3">
+                          <h3 className="font-semibold text-lg hover:text-primary cursor-pointer transition-colors">
+                            {item.title}
+                          </h3>
+                          <ExternalLink className="w-4 h-4 text-muted-foreground hover:text-primary cursor-pointer" />
+                        </div>
+                        <p className="text-muted-foreground">{item.summary}</p>
+                        
+                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                          <span className="font-medium">{item.source}</span>
+                          <div className="flex items-center gap-1">
+                            <Clock className="w-3 h-3" />
+                            {item.timestamp}
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="flex flex-col gap-3 items-end">
+                        <Button variant="ghost" size="icon">
+                          <BookmarkPlus className="w-4 h-4" />
+                        </Button>
+                        
+                        <div className="flex gap-2">
+                          <Badge variant="outline" className={getSentimentColor(item.sentiment)}>
+                            {getSentimentIcon(item.sentiment)}
+                            <span className="ml-1 capitalize">{item.sentiment}</span>
+                          </Badge>
+                          
+                          <Badge variant="outline" className={getImpactColor(item.impact)}>
+                            {item.impact} impact
+                          </Badge>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {item.relatedStocks.length > 0 && (
+                      <div className="pt-3 border-t border-border/40">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm text-muted-foreground">Related:</span>
+                          <div className="flex gap-2">
+                            {item.relatedStocks.map((stock) => (
+                              <Badge key={stock} variant="secondary" className="text-xs">
+                                {stock}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </Card>
+              ))}
             </div>
           </TabsContent>
 
-          <TabsContent value="energy">
-            <div className="text-center py-12">
-              <Newspaper className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-              <p className="text-muted-foreground">Energy news will be displayed here</p>
+          {/* Energy Tab */}
+          <TabsContent value="energy" className="space-y-6">
+            <div className="space-y-4">
+              {mockNews.filter(item => item.category === 'Energy').map((item) => (
+                <Card key={item.id} className="financial-card p-6 hover:border-primary/30 transition-all">
+                  <div className="space-y-4">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1 space-y-2">
+                        <div className="flex items-center gap-3">
+                          <h3 className="font-semibold text-lg hover:text-primary cursor-pointer transition-colors">
+                            {item.title}
+                          </h3>
+                          <ExternalLink className="w-4 h-4 text-muted-foreground hover:text-primary cursor-pointer" />
+                        </div>
+                        <p className="text-muted-foreground">{item.summary}</p>
+                        
+                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                          <span className="font-medium">{item.source}</span>
+                          <div className="flex items-center gap-1">
+                            <Clock className="w-3 h-3" />
+                            {item.timestamp}
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="flex flex-col gap-3 items-end">
+                        <Button variant="ghost" size="icon">
+                          <BookmarkPlus className="w-4 h-4" />
+                        </Button>
+                        
+                        <div className="flex gap-2">
+                          <Badge variant="outline" className={getSentimentColor(item.sentiment)}>
+                            {getSentimentIcon(item.sentiment)}
+                            <span className="ml-1 capitalize">{item.sentiment}</span>
+                          </Badge>
+                          
+                          <Badge variant="outline" className={getImpactColor(item.impact)}>
+                            {item.impact} impact
+                          </Badge>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {item.relatedStocks.length > 0 && (
+                      <div className="pt-3 border-t border-border/40">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm text-muted-foreground">Related:</span>
+                          <div className="flex gap-2">
+                            {item.relatedStocks.map((stock) => (
+                              <Badge key={stock} variant="secondary" className="text-xs">
+                                {stock}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </Card>
+              ))}
             </div>
           </TabsContent>
         </Tabs>
