@@ -2,14 +2,33 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, User, Menu, Bell } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 export const Header = () => {
   const location = useLocation();
+  const { toast } = useToast();
+  const [notificationCount, setNotificationCount] = useState(3);
   
   const isActive = (path: string) => {
     if (path === '/' && location.pathname === '/') return true;
     if (path !== '/' && location.pathname.startsWith(path)) return true;
     return false;
+  };
+
+  const handleNotificationClick = () => {
+    toast({
+      title: "Notifications",
+      description: `You have ${notificationCount} new alerts: Market volatility detected, Portfolio rebalancing suggested, New AI insights available.`,
+    });
+    setNotificationCount(0);
+  };
+
+  const handleProfileClick = () => {
+    toast({
+      title: "Profile Settings",
+      description: "Account: john@example.com | Risk Profile: Moderate | Portfolio Value: $125,430",
+    });
   };
 
   return (
@@ -65,11 +84,15 @@ export const Header = () => {
         </nav>
 
         <div className="flex items-center gap-3">
-          <Button variant="ghost" size="icon" className="relative">
+          <Button variant="ghost" size="icon" className="relative" onClick={handleNotificationClick}>
             <Bell className="h-4 w-4" />
-            <span className="absolute -top-1 -right-1 h-3 w-3 bg-primary rounded-full animate-pulse"></span>
+            {notificationCount > 0 && (
+              <span className="absolute -top-1 -right-1 h-5 w-5 bg-primary rounded-full text-xs text-primary-foreground flex items-center justify-center animate-pulse">
+                {notificationCount}
+              </span>
+            )}
           </Button>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" onClick={handleProfileClick}>
             <User className="h-4 w-4" />
           </Button>
           <Button variant="ghost" size="icon" className="md:hidden">

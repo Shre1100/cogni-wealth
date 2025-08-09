@@ -34,6 +34,26 @@ export const ChatInterface = () => {
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
 
+  const generateAIResponse = (userInput: string): string => {
+    const input = userInput.toLowerCase();
+    
+    if (input.includes('apple') || input.includes('aapl')) {
+      return "Apple (AAPL) is currently trading well with strong fundamentals. The company shows solid revenue growth, strong cash position, and continued innovation in services. Consider your risk tolerance and portfolio diversification before investing. Current technical indicators suggest moderate bullish sentiment.";
+    } else if (input.includes('tesla') || input.includes('tsla')) {
+      return "Tesla (TSLA) remains volatile but has strong long-term potential in the EV market. The stock shows high volatility and should be considered a growth investment with higher risk. Monitor production numbers and market expansion for key indicators.";
+    } else if (input.includes('etf') && input.includes('low risk')) {
+      return "For low-risk ETF options, consider: VTI (Total Stock Market), SPY (S&P 500), or BND (Total Bond Market). These provide broad diversification with lower volatility. Bond ETFs like BND offer stability, while VTI/SPY provide market exposure with historical steady growth.";
+    } else if (input.includes('portfolio') && input.includes('risk')) {
+      return "Portfolio risk analysis suggests diversifying across asset classes. For conservative investors: 60% stocks, 40% bonds. Moderate: 70% stocks, 30% bonds. Aggressive: 80-90% stocks, 10-20% bonds. Consider your age, goals, and timeline for retirement.";
+    } else if (input.includes('market') && (input.includes('outlook') || input.includes('trend'))) {
+      return "Current market outlook shows mixed signals. Tech stocks face headwinds from interest rates, while value stocks show resilience. Inflation concerns persist but are moderating. Consider dollar-cost averaging for long-term positions and maintain diversification across sectors.";
+    } else if (input.includes('crypto') || input.includes('bitcoin')) {
+      return "Cryptocurrency remains highly volatile and speculative. Only invest what you can afford to lose (typically 5-10% of portfolio maximum). Bitcoin and Ethereum are the most established, but regulatory uncertainty persists. Consider it a high-risk, high-reward asset class.";
+    } else {
+      return `Thank you for your question about "${userInput}". Based on current market conditions and financial principles, I recommend: conducting thorough research, considering your risk tolerance, and maintaining a diversified portfolio. This is educational information only - please consult with a qualified financial advisor for personalized advice.`;
+    }
+  };
+
   const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
 
@@ -45,20 +65,21 @@ export const ChatInterface = () => {
     };
 
     setMessages(prev => [...prev, userMessage]);
+    const currentInput = inputValue;
     setInputValue("");
     setIsTyping(true);
 
-    // Simulate AI response
+    // Generate contextual AI response
     setTimeout(() => {
       const aiResponse: ChatMessage = {
         id: (Date.now() + 1).toString(),
         type: 'ai',
-        content: `I understand you're asking about "${inputValue}". Based on current market analysis and your risk profile, here's my recommendation: This is a demo response. In a real implementation, this would connect to an LLM API for intelligent financial advice.`,
+        content: generateAIResponse(currentInput),
         timestamp: new Date()
       };
       setMessages(prev => [...prev, aiResponse]);
       setIsTyping(false);
-    }, 2000);
+    }, 1000 + Math.random() * 1000); // Random delay between 1-2 seconds
   };
 
   const handleSuggestionClick = (question: string) => {
