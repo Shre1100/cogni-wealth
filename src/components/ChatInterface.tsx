@@ -55,7 +55,11 @@ export const ChatInterface = () => {
   };
 
   const handleSendMessage = async () => {
-    if (!inputValue.trim()) return;
+    console.log("Send message clicked, input value:", inputValue);
+    if (!inputValue.trim()) {
+      console.log("Input is empty, returning");
+      return;
+    }
 
     const userMessage: ChatMessage = {
       id: Date.now().toString(),
@@ -64,6 +68,7 @@ export const ChatInterface = () => {
       timestamp: new Date()
     };
 
+    console.log("Adding user message:", userMessage);
     setMessages(prev => [...prev, userMessage]);
     const currentInput = inputValue;
     setInputValue("");
@@ -77,6 +82,7 @@ export const ChatInterface = () => {
         content: generateAIResponse(currentInput),
         timestamp: new Date()
       };
+      console.log("Adding AI response:", aiResponse);
       setMessages(prev => [...prev, aiResponse]);
       setIsTyping(false);
     }, 1000 + Math.random() * 1000); // Random delay between 1-2 seconds
