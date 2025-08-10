@@ -4,8 +4,29 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, BarChart3, PieChart, Activity } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+
+  const handleQuickAction = (action: string) => {
+    // TODO: Connect to actual functionality
+    switch (action) {
+      case 'buy':
+        console.log('Navigate to buy stocks page');
+        break;
+      case 'analyze':
+        navigate('/insights');
+        break;
+      case 'rebalance':
+        navigate('/portfolio');
+        break;
+      case 'ai-advice':
+        navigate('/insights');
+        break;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background pt-4">
       <div className="container mx-auto px-4 space-y-8">
@@ -72,19 +93,19 @@ const Dashboard = () => {
         <Card className="financial-card p-6">
           <h3 className="text-xl font-semibold mb-4">Quick Actions</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Button variant="financial" className="h-16 flex-col">
+            <Button variant="financial" className="h-16 flex-col" onClick={() => handleQuickAction('buy')}>
               <TrendingUp className="w-5 h-5 mb-1" />
               Buy Stock
             </Button>
-            <Button variant="outline" className="h-16 flex-col">
+            <Button variant="outline" className="h-16 flex-col" onClick={() => handleQuickAction('analyze')}>
               <BarChart3 className="w-5 h-5 mb-1" />
               Analyze
             </Button>
-            <Button variant="outline" className="h-16 flex-col">
+            <Button variant="outline" className="h-16 flex-col" onClick={() => handleQuickAction('rebalance')}>
               <PieChart className="w-5 h-5 mb-1" />
               Rebalance
             </Button>
-            <Button variant="success" className="h-16 flex-col">
+            <Button variant="success" className="h-16 flex-col" onClick={() => handleQuickAction('ai-advice')}>
               <Activity className="w-5 h-5 mb-1" />
               AI Advice
             </Button>

@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, User, Menu, Bell } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { NotificationsSidebar } from "@/components/NotificationsSidebar";
 
@@ -11,6 +11,31 @@ export const Header = () => {
   const { toast } = useToast();
   const [notificationCount, setNotificationCount] = useState(3);
   const [showNotifications, setShowNotifications] = useState(false);
+  
+  // TODO: Replace with actual notification data from backend
+  useEffect(() => {
+    // Mock notification data - would come from your backend
+    const mockNotifications = [
+      { id: '1', read: false },
+      { id: '2', read: false },
+      { id: '3', read: true },
+      { id: '4', read: true },
+      { id: '5', read: false }
+    ];
+    
+    const unreadCount = mockNotifications.filter(n => !n.read).length;
+    setNotificationCount(unreadCount);
+
+    // Listen for notification updates
+    const handleNotificationUpdate = (event: CustomEvent) => {
+      setNotificationCount(event.detail.unreadCount);
+    };
+
+    window.addEventListener('notificationUpdate', handleNotificationUpdate as EventListener);
+    return () => {
+      window.removeEventListener('notificationUpdate', handleNotificationUpdate as EventListener);
+    };
+  }, []);
   
   const isActive = (path: string) => {
     if (path === '/' && location.pathname === '/') return true;
@@ -99,7 +124,8 @@ export const Header = () => {
         {/* Notifications Sidebar */}
         <NotificationsSidebar 
           open={showNotifications} 
-          onClose={() => setShowNotifications(false)} 
+          onClose={() => setShowNotifications(false)}
+          onNotificationUpdate={(unreadCount) => setNotificationCount(unreadCount)}
         />
       </div>
     </header>

@@ -36,10 +36,10 @@ export const Footer = () => {
           <div className="space-y-4">
             <h3 className="font-semibold">Features</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground transition-colors">Portfolio Tracking</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">AI Insights</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Risk Analysis</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Market Data</a></li>
+              <li><a href="/portfolio" className="hover:text-foreground transition-colors">Portfolio Tracking</a></li>
+              <li><a href="/insights" className="hover:text-foreground transition-colors">AI Insights</a></li>
+              <li><a href="/insights" className="hover:text-foreground transition-colors">Risk Analysis</a></li>
+              <li><a href="/news" className="hover:text-foreground transition-colors">Market Data</a></li>
             </ul>
           </div>
 

@@ -136,7 +136,7 @@ export const PortfolioPreview = () => {
           </Card>
 
           <div className="text-center">
-            <Button variant="financial" size="lg">
+            <Button variant="financial" size="lg" onClick={() => window.location.href = '/portfolio'}>
               View Full Portfolio
             </Button>
           </div>

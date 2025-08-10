@@ -106,25 +106,31 @@ const getPriorityColor = (priority: string) => {
 interface NotificationsSidebarProps {
   open: boolean;
   onClose: () => void;
+  onNotificationUpdate?: (unreadCount: number) => void;
 }
 
-export const NotificationsSidebar = ({ open, onClose }: NotificationsSidebarProps) => {
+export const NotificationsSidebar = ({ open, onClose, onNotificationUpdate }: NotificationsSidebarProps) => {
   const [notifications, setNotifications] = useState(mockNotifications);
 
   const markAsRead = (id: string) => {
     // TODO: Connect to database to update notification status
-    setNotifications(prev => 
-      prev.map(notif => 
+    setNotifications(prev => {
+      const updated = prev.map(notif => 
         notif.id === id ? { ...notif, read: true } : notif
-      )
-    );
+      );
+      const newUnreadCount = updated.filter(n => !n.read).length;
+      onNotificationUpdate?.(newUnreadCount);
+      return updated;
+    });
   };
 
   const markAllAsRead = () => {
     // TODO: Connect to database to update all notifications
-    setNotifications(prev => 
-      prev.map(notif => ({ ...notif, read: true }))
-    );
+    setNotifications(prev => {
+      const updated = prev.map(notif => ({ ...notif, read: true }));
+      onNotificationUpdate?.(0);
+      return updated;
+    });
   };
 
   const unreadCount = notifications.filter(n => !n.read).length;
@@ -161,7 +167,7 @@ export const NotificationsSidebar = ({ open, onClose }: NotificationsSidebarProp
             </TabsList>
           </div>
 
-          <TabsContent value="all" className="mt-4 px-6 space-y-3 h-full overflow-y-auto pb-6">
+          <TabsContent value="all" className="mt-4 px-6 space-y-3 max-h-[calc(100vh-16rem)] overflow-y-auto pb-6">
             {allNotifications.map((notification) => (
               <Card
                 key={notification.id}
@@ -201,7 +207,7 @@ export const NotificationsSidebar = ({ open, onClose }: NotificationsSidebarProp
             ))}
           </TabsContent>
 
-          <TabsContent value="unread" className="mt-4 px-6 space-y-3 h-full overflow-y-auto pb-6">
+          <TabsContent value="unread" className="mt-4 px-6 space-y-3 max-h-[calc(100vh-16rem)] overflow-y-auto pb-6">
             {unreadNotifications.length === 0 ? (
               <div className="text-center py-12">
                 <CheckCircle2 className="w-12 h-12 text-success mx-auto mb-4" />

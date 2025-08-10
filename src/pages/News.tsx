@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { 
   Newspaper, 
   TrendingUp, 
@@ -127,6 +130,20 @@ const getImpactColor = (impact: string) => {
 };
 
 const News = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [showFilters, setShowFilters] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedSentiment, setSelectedSentiment] = useState("all");
+
+  const filteredNews = mockNews.filter(item => {
+    const matchesSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         item.summary.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === "all" || item.category.toLowerCase() === selectedCategory.toLowerCase();
+    const matchesSentiment = selectedSentiment === "all" || item.sentiment === selectedSentiment;
+    
+    return matchesSearch && matchesCategory && matchesSentiment;
+  });
+
   return (
     <div className="min-h-screen bg-background pt-4">
       <div className="container mx-auto px-4 space-y-8">
@@ -150,12 +167,66 @@ const News = () => {
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input placeholder="Search financial news..." className="pl-10" />
+              <Input 
+                placeholder="Search financial news..." 
+                className="pl-10" 
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
             </div>
-            <Button variant="outline">
-              <Filter className="w-4 h-4 mr-2" />
-              Filters
-            </Button>
+            <Popover open={showFilters} onOpenChange={setShowFilters}>
+              <PopoverTrigger asChild>
+                <Button variant="outline">
+                  <Filter className="w-4 h-4 mr-2" />
+                  Filters
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-80">
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Category</label>
+                    <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select category" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Categories</SelectItem>
+                        <SelectItem value="earnings">Earnings</SelectItem>
+                        <SelectItem value="economy">Economy</SelectItem>
+                        <SelectItem value="technology">Technology</SelectItem>
+                        <SelectItem value="energy">Energy</SelectItem>
+                        <SelectItem value="crypto">Crypto</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Sentiment</label>
+                    <Select value={selectedSentiment} onValueChange={setSelectedSentiment}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select sentiment" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Sentiment</SelectItem>
+                        <SelectItem value="positive">Positive</SelectItem>
+                        <SelectItem value="negative">Negative</SelectItem>
+                        <SelectItem value="neutral">Neutral</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    className="w-full" 
+                    onClick={() => {
+                      setSelectedCategory("all");
+                      setSelectedSentiment("all");
+                      setSearchTerm("");
+                    }}
+                  >
+                    Clear Filters
+                  </Button>
+                </div>
+              </PopoverContent>
+            </Popover>
           </div>
         </div>
 
@@ -201,7 +272,7 @@ const News = () => {
 
           <TabsContent value="all" className="space-y-6">
             <div className="space-y-4">
-              {mockNews.map((item) => (
+              {filteredNews.map((item) => (
                 <Card key={item.id} className="financial-card p-6 hover:border-primary/30 transition-all">
                   <div className="space-y-4">
                     <div className="flex items-start justify-between gap-4">
