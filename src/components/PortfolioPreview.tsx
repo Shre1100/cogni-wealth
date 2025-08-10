@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { PieChart, BarChart3, TrendingUp, Wallet, Target } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface PortfolioAllocation {
   category: string;
@@ -25,6 +26,7 @@ const totalGain = 12450;
 const totalGainPercent = 9.06;
 
 export const PortfolioPreview = () => {
+  const navigate = useNavigate();
   return (
     <section className="py-16 px-4">
       <div className="container mx-auto max-w-6xl">
@@ -86,7 +88,7 @@ export const PortfolioPreview = () => {
                   <PieChart className="w-5 h-5 text-primary" />
                   Asset Allocation
                 </h3>
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" onClick={() => navigate('/insights')}>
                   <BarChart3 className="w-4 h-4 mr-2" />
                   View Analytics
                 </Button>
@@ -136,7 +138,7 @@ export const PortfolioPreview = () => {
           </Card>
 
           <div className="text-center">
-            <Button variant="financial" size="lg" onClick={() => window.location.href = '/portfolio'}>
+            <Button variant="financial" size="lg" onClick={() => navigate('/portfolio')}>
               View Full Portfolio
             </Button>
           </div>

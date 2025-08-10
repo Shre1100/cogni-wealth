@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Brain, MessageSquare, TrendingUp, AlertTriangle, Lightbulb } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface InsightItem {
   id: string;
@@ -66,6 +67,7 @@ const getPriorityColor = (priority: string) => {
 };
 
 export const AIInsights = () => {
+  const navigate = useNavigate();
   return (
     <section className="py-16 px-4 bg-gradient-to-b from-transparent to-muted/20">
       <div className="container mx-auto max-w-6xl">
@@ -127,7 +129,7 @@ export const AIInsights = () => {
           </div>
 
           <div className="text-center">
-            <Button variant="premium" size="lg" className="group">
+            <Button variant="premium" size="lg" className="group" onClick={() => navigate('/insights')}>
               <MessageSquare className="w-5 h-5 mr-2" />
               Chat with AI Advisor
               <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity">→</span>
