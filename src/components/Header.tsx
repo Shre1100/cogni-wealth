@@ -5,6 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { NotificationsSidebar } from "@/components/NotificationsSidebar";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export const Header = () => {
   const location = useLocation();
@@ -105,6 +106,7 @@ export const Header = () => {
         </nav>
 
         <div className="flex items-center gap-3">
+          <ThemeToggle />
           <Button variant="ghost" size="icon" className="relative" onClick={handleNotificationClick}>
             <Bell className="h-4 w-4" />
             {notificationCount > 0 && (

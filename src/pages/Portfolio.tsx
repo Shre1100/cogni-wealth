@@ -14,8 +14,13 @@ import {
   Download,
   BarChart3
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const Portfolio = () => {
+  const navigate = useNavigate();
+  const { toast } = useToast();
+  
   const holdings = [
     { symbol: "AAPL", name: "Apple Inc.", shares: 50, avgPrice: 145.30, currentPrice: 175.43, value: 8771.50 },
     { symbol: "MSFT", name: "Microsoft Corp.", shares: 25, avgPrice: 320.50, currentPrice: 345.67, value: 8641.75 },
@@ -34,6 +39,23 @@ const Portfolio = () => {
     return { gainLoss, percentage };
   };
 
+  const handleExport = () => {
+    toast({
+      title: "Exporting Portfolio",
+      description: "Your portfolio data is being exported...",
+    });
+  };
+
+  const handleAddPosition = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigate('/dashboard');
+  };
+
+  const handleViewCharts = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigate('/insights');
+  };
+
   return (
     <div className="min-h-screen bg-background pt-4">
       <div className="container mx-auto px-4 space-y-8">
@@ -44,11 +66,11 @@ const Portfolio = () => {
             <p className="text-muted-foreground">Track and manage your investments</p>
           </div>
           <div className="flex gap-3">
-            <Button variant="outline">
+            <Button variant="outline" onClick={handleExport}>
               <Download className="w-4 h-4 mr-2" />
               Export
             </Button>
-            <Button variant="financial">
+            <Button variant="financial" onClick={handleAddPosition}>
               <Plus className="w-4 h-4 mr-2" />
               Add Position
             </Button>
@@ -190,7 +212,7 @@ const Portfolio = () => {
             <Card className="financial-card p-6">
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-xl font-semibold">Performance Analytics</h3>
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" onClick={handleViewCharts}>
                   <BarChart3 className="w-4 h-4 mr-2" />
                   View Charts
                 </Button>

@@ -6,22 +6,22 @@
 
 @layer base {
   :root {
-    /* Core Financial Theme - Light Mode Fallback */
-    --background: 214 32% 4%;
-    --foreground: 210 40% 98%;
+    /* Core Financial Theme - Light Mode */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
 
     /* Cards and Surfaces */
-    --card: 214 32% 6%;
-    --card-foreground: 210 40% 98%;
-    --card-hover: 214 32% 8%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --card-hover: 210 40% 98%;
 
     /* Interactive Elements */
-    --popover: 214 32% 6%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
 
     /* Financial Brand Colors */
-    --primary: 217 91% 60%; /* Financial Blue */
-    --primary-foreground: 214 32% 4%;
+    --primary: 222.2 47.4% 11.2%; /* Financial Blue */
+    --primary-foreground: 210 40% 98%;
     --primary-glow: 217 91% 70%;
 
     /* Success/Growth */
@@ -38,21 +38,21 @@
     --warning-foreground: 214 32% 4%;
 
     /* Secondary Elements */
-    --secondary: 215 16% 20%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 210 40% 98%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
 
     /* Muted Elements */
-    --muted: 215 16% 15%;
-    --muted-foreground: 215 16% 65%;
+    --muted: 210 40% 98%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
     /* Accent */
     --accent: 263 70% 65%; /* Purple accent */
     --accent-foreground: 210 40% 98%;
 
     /* Borders and Inputs */
-    --border: 215 16% 20%;
-    --input: 215 16% 15%;
-    --ring: 217 91% 60%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 47.4% 11.2%;
 
     /* Chart Colors */
     --chart-1: 217 91% 60%;
@@ -96,33 +96,40 @@
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    /* Core Financial Theme - Dark Mode */
+    --background: 214 32% 4%;
     --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;
+    /* Cards and Surfaces */
+    --card: 214 32% 6%;
     --card-foreground: 210 40% 98%;
+    --card-hover: 214 32% 8%;
 
-    --popover: 222.2 84% 4.9%;
+    /* Interactive Elements */
+    --popover: 214 32% 6%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    /* Financial Brand Colors */
+    --primary: 217 91% 60%; /* Financial Blue */
+    --primary-foreground: 214 32% 4%;
+    --primary-glow: 217 91% 70%;
 
-    --secondary: 217.2 32.6% 17.5%;
+    /* Secondary Elements */
+    --secondary: 215 16% 20%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    /* Muted Elements */
+    --muted: 215 16% 15%;
+    --muted-foreground: 215 16% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
+    /* Accent */
+    --accent: 263 70% 65%; /* Purple accent */
     --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    /* Borders and Inputs */
+    --border: 215 16% 20%;
+    --input: 215 16% 15%;
+    --ring: 217 91% 60%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
