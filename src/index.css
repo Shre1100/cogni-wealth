@@ -142,6 +142,42 @@
   body {
     @apply bg-background text-foreground font-sans;
     background: var(--gradient-hero);
+    cursor: none;
+  }
+
+  /* Custom Cursor */
+  .cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: hsl(var(--primary));
+    mix-blend-mode: difference;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease-out;
+  }
+
+  .cursor-follower {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid hsl(var(--primary) / 0.3);
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.3s ease-out;
+  }
+
+  /* Cursor hover effects */
+  .cursor-hover .cursor {
+    transform: scale(1.5);
+    background: hsl(var(--accent));
+  }
+
+  .cursor-hover .cursor-follower {
+    transform: scale(1.2);
+    border-color: hsl(var(--accent) / 0.5);
   }
 }
 

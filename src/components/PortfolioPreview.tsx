@@ -27,6 +27,12 @@ const totalGainPercent = 9.06;
 
 export const PortfolioPreview = () => {
   const navigate = useNavigate();
+
+  const handleNavigation = (path: string) => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigate(path);
+  };
+
   return (
     <section className="py-16 px-4">
       <div className="container mx-auto max-w-6xl">
@@ -88,7 +94,7 @@ export const PortfolioPreview = () => {
                   <PieChart className="w-5 h-5 text-primary" />
                   Asset Allocation
                 </h3>
-                <Button variant="outline" size="sm" onClick={() => navigate('/insights')}>
+                <Button variant="outline" size="sm" onClick={() => handleNavigation('/insights')}>
                   <BarChart3 className="w-4 h-4 mr-2" />
                   View Analytics
                 </Button>
@@ -138,7 +144,7 @@ export const PortfolioPreview = () => {
           </Card>
 
           <div className="text-center">
-            <Button variant="financial" size="lg" onClick={() => navigate('/portfolio')}>
+            <Button variant="financial" size="lg" onClick={() => handleNavigation('/portfolio')}>
               View Full Portfolio
             </Button>
           </div>
