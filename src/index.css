@@ -10,17 +10,17 @@
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
-    /* Cards and Surfaces */
-    --card: 0 0% 100%;
+    /* Cards and Surfaces - Light theme containers */
+    --card: 210 40% 98%;
     --card-foreground: 222.2 84% 4.9%;
-    --card-hover: 210 40% 98%;
+    --card-hover: 210 40% 96%;
 
     /* Interactive Elements */
-    --popover: 0 0% 100%;
+    --popover: 210 40% 98%;
     --popover-foreground: 222.2 84% 4.9%;
 
     /* Financial Brand Colors */
-    --primary: 222.2 47.4% 11.2%; /* Financial Blue */
+    --primary: 217 91% 60%; /* Financial Blue */
     --primary-foreground: 210 40% 98%;
     --primary-glow: 217 91% 70%;
 
@@ -38,21 +38,21 @@
     --warning-foreground: 214 32% 4%;
 
     /* Secondary Elements */
-    --secondary: 210 40% 98%;
+    --secondary: 210 40% 95%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     /* Muted Elements */
-    --muted: 210 40% 98%;
+    --muted: 210 40% 96%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
     /* Accent */
     --accent: 263 70% 65%; /* Purple accent */
-    --accent-foreground: 210 40% 98%;
+    --accent-foreground: 222.2 84% 4.9%;
 
     /* Borders and Inputs */
     --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 47.4% 11.2%;
+    --input: 210 40% 98%;
+    --ring: 217 91% 60%;
 
     /* Chart Colors */
     --chart-1: 217 91% 60%;
@@ -61,11 +61,11 @@
     --chart-4: 48 96% 53%;
     --chart-5: 0 84% 60%;
 
-    /* Gradients */
+    /* Gradients - Light theme */
     --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(263 70% 65%));
     --gradient-success: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 46%));
-    --gradient-hero: linear-gradient(135deg, hsl(214 32% 4%), hsl(215 16% 8%));
-    --gradient-card: linear-gradient(135deg, hsl(214 32% 6%), hsl(215 16% 10%));
+    --gradient-hero: linear-gradient(135deg, hsl(210 40% 98%), hsl(220 20% 96%));
+    --gradient-card: linear-gradient(135deg, hsl(210 40% 98%), hsl(220 20% 97%));
 
     /* Shadows */
     --shadow-financial: 0 10px 30px -10px hsl(217 91% 60% / 0.3);
@@ -130,6 +130,10 @@
     --border: 215 16% 20%;
     --input: 215 16% 15%;
     --ring: 217 91% 60%;
+    
+    /* Gradients - Dark theme */
+    --gradient-hero: linear-gradient(135deg, hsl(214 32% 4%), hsl(215 16% 8%));
+    --gradient-card: linear-gradient(135deg, hsl(214 32% 6%), hsl(215 16% 10%));
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
