@@ -11,6 +11,32 @@ interface MarketData {
   volume?: string;
 }
 
+// ========== BACKEND INTEGRATION POINTS ==========
+// API CALLS NEEDED:
+// 1. GET /market/stocks/trending - Top trending stocks
+// 2. GET /market/indices - Major market indices (S&P 500, NASDAQ, DOW)
+// 3. GET /market/real-time-prices - Real-time stock prices via WebSocket
+// 4. GET /market/pre-market - Pre-market trading data
+// 5. GET /market/after-hours - After-hours trading data
+// 6. GET /market/sector-performance - Sector performance overview
+//
+// useEffect(() => {
+//   fetchMarketData();
+//   const interval = setInterval(fetchMarketData, 5000); // Update every 5 seconds
+//   return () => clearInterval(interval);
+// }, []);
+//
+// const fetchMarketData = async () => {
+//   try {
+//     const response = await fetch('/api/market/overview');
+//     const data = await response.json();
+//     setMarketData(data.stocks);
+//   } catch (error) {
+//     console.error('Failed to fetch market data:', error);
+//   }
+// };
+
+// MOCK DATA - Replace with real-time API
 const mockMarketData: MarketData[] = [
   { symbol: "AAPL", name: "Apple Inc.", price: 175.43, change: 2.15, changePercent: 1.24, volume: "52.3M" },
   { symbol: "MSFT", name: "Microsoft Corp.", price: 345.67, change: -1.23, changePercent: -0.35, volume: "28.1M" },

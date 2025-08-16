@@ -31,6 +31,39 @@ interface NewsItem {
   relatedStocks: string[];
 }
 
+// ========== BACKEND INTEGRATION POINTS ==========
+// API CALLS NEEDED:
+// 1. GET /news/feed - Paginated news feed with filters
+// 2. GET /news/sentiment-analysis - AI sentiment analysis for news
+// 3. GET /news/market-impact - Market impact predictions
+// 4. POST /news/bookmark - Save/bookmark news articles
+// 5. GET /news/categories - Available news categories
+// 6. GET /news/sources - Available news sources
+// 7. GET /news/search - Search news articles
+// 8. GET /news/related-stocks - News related to user's portfolio
+//
+// useEffect(() => {
+//   fetchNewsData();
+// }, [selectedCategory, selectedSentiment, searchTerm]);
+//
+// const fetchNewsData = async () => {
+//   try {
+//     const params = new URLSearchParams({
+//       category: selectedCategory,
+//       sentiment: selectedSentiment,
+//       search: searchTerm,
+//       page: '1',
+//       limit: '20'
+//     });
+//     const response = await fetch(`/api/news/feed?${params}`);
+//     const data = await response.json();
+//     setNews(data.articles);
+//   } catch (error) {
+//     console.error('Failed to fetch news:', error);
+//   }
+// };
+
+// MOCK DATA - Replace with API calls
 const mockNews: NewsItem[] = [
   {
     id: '1',

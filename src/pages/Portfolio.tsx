@@ -21,6 +21,37 @@ const Portfolio = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   
+  // ========== BACKEND INTEGRATION POINTS ==========
+  // API CALLS NEEDED:
+  // 1. GET /portfolio/holdings - User's current stock holdings
+  // 2. GET /portfolio/performance - Historical performance data
+  // 3. GET /portfolio/allocation - Asset allocation breakdown
+  // 4. GET /market/prices - Real-time price updates for holdings
+  // 5. POST /portfolio/export - Export portfolio data to PDF/CSV
+  // 6. POST /portfolio/positions - Add new stock position
+  // 7. PUT /portfolio/positions/{id} - Update existing position
+  // 8. DELETE /portfolio/positions/{id} - Remove position
+  //
+  // const [holdings, setHoldings] = useState([]);
+  // const [loading, setLoading] = useState(true);
+  //
+  // useEffect(() => {
+  //   fetchPortfolioData();
+  // }, []);
+  //
+  // const fetchPortfolioData = async () => {
+  //   try {
+  //     const response = await fetch('/api/portfolio/holdings');
+  //     const data = await response.json();
+  //     setHoldings(data.holdings);
+  //   } catch (error) {
+  //     toast({ title: "Error", description: "Failed to load portfolio data" });
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+  
+  // MOCK DATA - Replace with API calls
   const holdings = [
     { symbol: "AAPL", name: "Apple Inc.", shares: 50, avgPrice: 145.30, currentPrice: 175.43, value: 8771.50 },
     { symbol: "MSFT", name: "Microsoft Corp.", shares: 25, avgPrice: 320.50, currentPrice: 345.67, value: 8641.75 },
@@ -39,7 +70,28 @@ const Portfolio = () => {
     return { gainLoss, percentage };
   };
 
-  const handleExport = () => {
+  const handleExport = async () => {
+    // ========== BACKEND INTEGRATION POINT ==========
+    // API CALL NEEDED: POST /portfolio/export
+    // PAYLOAD: { format: 'pdf' | 'csv', includeCharts: boolean }
+    // EXPECTED RESPONSE: { downloadUrl: string } or direct file stream
+    //
+    // try {
+    //   const response = await fetch('/api/portfolio/export', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({ format: 'pdf', includeCharts: true })
+    //   });
+    //   const blob = await response.blob();
+    //   const url = window.URL.createObjectURL(blob);
+    //   const a = document.createElement('a');
+    //   a.href = url;
+    //   a.download = 'portfolio-export.pdf';
+    //   a.click();
+    // } catch (error) {
+    //   toast({ title: "Export Failed", description: error.message, variant: "destructive" });
+    // }
+    
     toast({
       title: "Exporting Portfolio",
       description: "Your portfolio data is being exported...",
@@ -47,6 +99,11 @@ const Portfolio = () => {
   };
 
   const handleAddPosition = () => {
+    // ========== BACKEND INTEGRATION POINT ==========
+    // API CALL NEEDED: POST /portfolio/positions
+    // PAYLOAD: { symbol: string, shares: number, purchasePrice: number, purchaseDate: string }
+    // EXPECTED RESPONSE: { position: {...}, portfolio: {...} }
+    
     window.scrollTo({ top: 0, behavior: 'smooth' });
     navigate('/dashboard');
   };

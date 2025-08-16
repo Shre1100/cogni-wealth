@@ -12,6 +12,34 @@ interface PortfolioAllocation {
   color: string;
 }
 
+// ========== BACKEND INTEGRATION POINTS ==========
+// API CALLS NEEDED:
+// 1. GET /portfolio/summary - Portfolio value, gains, risk score
+// 2. GET /portfolio/allocation - Asset allocation by sector/category
+// 3. GET /portfolio/diversification-score - Portfolio diversification analysis
+// 4. GET /portfolio/performance/daily - Daily performance metrics
+//
+// useEffect(() => {
+//   fetchPortfolioPreview();
+// }, []);
+//
+// const fetchPortfolioPreview = async () => {
+//   try {
+//     const [summary, allocation] = await Promise.all([
+//       fetch('/api/portfolio/summary'),
+//       fetch('/api/portfolio/allocation')
+//     ]);
+//     const summaryData = await summary.json();
+//     const allocationData = await allocation.json();
+//     setTotalValue(summaryData.totalValue);
+//     setTotalGain(summaryData.totalGain);
+//     setPortfolioAllocation(allocationData.allocation);
+//   } catch (error) {
+//     console.error('Failed to fetch portfolio preview:', error);
+//   }
+// };
+
+// MOCK DATA - Replace with API calls
 const mockPortfolio: PortfolioAllocation[] = [
   { category: "Technology", percentage: 35, value: 52500, color: "hsl(var(--chart-1))" },
   { category: "Healthcare", percentage: 20, value: 30000, color: "hsl(var(--chart-2))" },

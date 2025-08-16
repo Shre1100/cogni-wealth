@@ -13,6 +13,32 @@ interface InsightItem {
   priority: 'high' | 'medium' | 'low';
 }
 
+// ========== BACKEND INTEGRATION POINTS ==========
+// API CALLS NEEDED:
+// 1. GET /ai/insights - Personalized AI insights based on portfolio
+// 2. POST /ai/analyze-portfolio - Trigger portfolio analysis
+// 3. GET /ai/recommendations - AI-generated investment recommendations
+// 4. GET /ai/risk-analysis - Risk analysis and warnings
+// 5. GET /ai/market-opportunities - Market opportunities detection
+// 6. POST /ai/chat - Chat with AI advisor
+// 7. GET /ai/sentiment-analysis - Market sentiment analysis
+// 8. POST /ai/custom-query - Custom AI analysis queries
+//
+// useEffect(() => {
+//   fetchAIInsights();
+// }, []);
+//
+// const fetchAIInsights = async () => {
+//   try {
+//     const response = await fetch('/api/ai/insights');
+//     const data = await response.json();
+//     setInsights(data.insights);
+//   } catch (error) {
+//     console.error('Failed to fetch AI insights:', error);
+//   }
+// };
+
+// MOCK DATA - Replace with AI/ML backend
 const mockInsights: InsightItem[] = [
   {
     id: '1',

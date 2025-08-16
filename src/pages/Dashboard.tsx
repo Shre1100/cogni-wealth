@@ -9,16 +9,42 @@ import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
   const navigate = useNavigate();
 
+  // ========== BACKEND INTEGRATION POINTS ==========
+  // API CALLS NEEDED:
+  // 1. GET /dashboard/summary - Portfolio value, P&L, positions count
+  // 2. GET /portfolio/performance - Real-time performance metrics
+  // 3. GET /market/overview - Market indices and trending stocks
+  // 4. GET /user/profile - User preferences and settings
+  // 5. GET /alerts/active - Active price alerts and notifications
+  //
+  // useEffect(() => {
+  //   fetchDashboardData();
+  // }, []);
+  //
+  // const fetchDashboardData = async () => {
+  //   try {
+  //     const [summary, performance, market] = await Promise.all([
+  //       fetch('/api/dashboard/summary'),
+  //       fetch('/api/portfolio/performance'),
+  //       fetch('/api/market/overview')
+  //     ]);
+  //     // Update state with fetched data
+  //   } catch (error) {
+  //     console.error('Failed to fetch dashboard data:', error);
+  //   }
+  // };
+
   const handleQuickAction = (action: string) => {
-    // TODO: Connect to actual functionality
     switch (action) {
       case 'buy':
+        // API CALL NEEDED: GET /trading/available-stocks
         console.log('Navigate to buy stocks page');
         break;
       case 'analyze':
         navigate('/insights');
         break;
       case 'rebalance':
+        // API CALL NEEDED: POST /portfolio/rebalance-suggestions
         navigate('/portfolio');
         break;
       case 'ai-advice':

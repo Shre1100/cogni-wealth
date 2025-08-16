@@ -27,14 +27,37 @@ const Login = () => {
     rememberMe: false
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // TODO: Connect to authentication system
-    // Example: const { data, error } = await supabase.auth.signInWithPassword({
-    //   email: formData.email,
-    //   password: formData.password,
-    // });
+    // ========== BACKEND INTEGRATION POINT ==========
+    // API CALL NEEDED: POST /auth/login
+    // PAYLOAD: { email: formData.email, password: formData.password, rememberMe: formData.rememberMe }
+    // EXPECTED RESPONSE: { user: {...}, token: "...", refreshToken: "..." }
+    // ERROR HANDLING: Invalid credentials, account locked, email not verified
+    // 
+    // Example implementation:
+    // try {
+    //   const response = await fetch('/api/auth/login', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({
+    //       email: formData.email,
+    //       password: formData.password,
+    //       rememberMe: formData.rememberMe
+    //     })
+    //   });
+    //   const data = await response.json();
+    //   if (response.ok) {
+    //     localStorage.setItem('token', data.token);
+    //     localStorage.setItem('user', JSON.stringify(data.user));
+    //     navigate('/dashboard');
+    //   } else {
+    //     throw new Error(data.message);
+    //   }
+    // } catch (error) {
+    //   toast({ title: "Login Failed", description: error.message, variant: "destructive" });
+    // }
     
     toast({
       title: "Login Successful",
@@ -43,8 +66,13 @@ const Login = () => {
   };
 
   const handleSocialLogin = (provider: string) => {
-    // TODO: Connect to social authentication
-    // Example: await supabase.auth.signInWithOAuth({ provider: 'google' });
+    // ========== BACKEND INTEGRATION POINT ==========
+    // API CALL NEEDED: GET /auth/oauth/{provider}
+    // REDIRECT: OAuth provider authorization URL
+    // CALLBACK: POST /auth/oauth/callback with authorization code
+    // 
+    // Example implementation:
+    // window.location.href = `/api/auth/oauth/${provider.toLowerCase()}`;
     
     toast({
       title: `${provider} Login`,

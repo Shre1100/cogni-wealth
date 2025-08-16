@@ -57,17 +57,21 @@ const Signup = () => {
       return;
     }
 
-    // TODO: Connect to authentication system
-    // Example: const { data, error } = await supabase.auth.signUp({
+    // ========== BACKEND INTEGRATION POINT ==========
+    // API CALL NEEDED: POST /auth/register
+    // PAYLOAD: { 
+    //   firstName: formData.firstName,
+    //   lastName: formData.lastName,
     //   email: formData.email,
     //   password: formData.password,
-    //   options: {
-    //     data: {
-    //       first_name: formData.firstName,
-    //       last_name: formData.lastName,
-    //     }
-    //   }
-    // });
+    //   acceptMarketing: formData.acceptMarketing
+    // }
+    // EXPECTED RESPONSE: { user: {...}, verificationRequired: boolean }
+    // ERROR HANDLING: Email exists, weak password, invalid email format
+    // 
+    // Additional API CALLS:
+    // - POST /auth/send-verification-email (after successful signup)
+    // - POST /user/preferences (initial user preferences setup)
     
     toast({
       title: "Account Created",

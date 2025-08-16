@@ -25,7 +25,35 @@ import {
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-// Mock user data - Replace with API call
+// ========== BACKEND INTEGRATION POINTS ==========
+// API CALLS NEEDED:
+// 1. GET /user/profile - Fetch user profile data
+// 2. PUT /user/profile - Update user profile data
+// 3. POST /user/avatar - Upload profile picture
+// 4. POST /user/verify-email - Send email verification
+// 5. POST /user/verify-phone - Send phone verification
+// 6. POST /user/change-password - Change password
+// 7. POST /user/enable-2fa - Enable two-factor authentication
+// 8. GET /user/sessions - Get active login sessions
+// 9. DELETE /user/sessions/{id} - Revoke session
+// 10. GET /user/export-data - Export user data (GDPR compliance)
+// 11. DELETE /user/account - Delete user account
+//
+// useEffect(() => {
+//   fetchUserProfile();
+// }, []);
+//
+// const fetchUserProfile = async () => {
+//   try {
+//     const response = await fetch('/api/user/profile');
+//     const data = await response.json();
+//     setUserData(data);
+//   } catch (error) {
+//     toast({ title: "Error", description: "Failed to load profile data" });
+//   }
+// };
+
+// MOCK DATA - Replace with API call
 const mockUserData = {
   id: '1',
   firstName: 'John',
@@ -50,8 +78,28 @@ const Profile = () => {
   const [emailVerificationPending, setEmailVerificationPending] = useState(false);
   const [showPersonalInfo, setShowPersonalInfo] = useState(true);
 
-  const handleSave = () => {
-    // TODO: Connect to database to save user profile
+  const handleSave = async () => {
+    // ========== BACKEND INTEGRATION POINT ==========
+    // API CALL NEEDED: PUT /user/profile
+    // PAYLOAD: userData object with updated fields
+    // EXPECTED RESPONSE: { success: boolean, user: {...} }
+    //
+    // try {
+    //   const response = await fetch('/api/user/profile', {
+    //     method: 'PUT',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify(userData)
+    //   });
+    //   if (response.ok) {
+    //     const updatedUser = await response.json();
+    //     setUserData(updatedUser);
+    //     setIsEditing(false);
+    //     toast({ title: "Profile Updated", description: "Your profile has been successfully updated." });
+    //   }
+    // } catch (error) {
+    //   toast({ title: "Update Failed", description: error.message, variant: "destructive" });
+    // }
+    
     setIsEditing(false);
     toast({
       title: "Profile Updated",
