@@ -101,56 +101,59 @@ export const AIInsights = () => {
   };
 
   return (
-    <section className="py-16 px-4 bg-gradient-to-b from-transparent to-muted/20">
+    <section className="py-10 sm:py-12 md:py-16 px-4 bg-gradient-to-b from-transparent to-muted/20">
       <div className="container mx-auto max-w-6xl">
-        <div className="space-y-8">
-          <div className="text-center space-y-4">
+        <div className="space-y-6 sm:space-y-8">
+          <div className="text-center space-y-3 sm:space-y-4">
             <div className="flex items-center justify-center gap-2">
-              <Brain className="w-8 h-8 text-primary" />
-              <h2 className="text-3xl font-bold">AI Financial Insights</h2>
+              <Brain className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">AI Financial Insights</h2>
             </div>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto px-2">
               Our AI analyzes market trends, your portfolio, and global financial data to provide 
               personalized insights and recommendations.
             </p>
           </div>
 
-          <div className="grid gap-6">
+          <div className="grid gap-4 sm:gap-6">
             {mockInsights.map((insight) => (
-              <Card key={insight.id} className="financial-card p-6">
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0">
+              <Card key={insight.id} className="financial-card p-4 sm:p-6">
+                <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
+                  <div className="flex-shrink-0 hidden sm:block">
                     {getInsightIcon(insight.type)}
                   </div>
-                  <div className="flex-1 space-y-3">
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <h3 className="font-semibold text-lg">{insight.title}</h3>
-                        <p className="text-muted-foreground mt-1">{insight.description}</p>
+                  <div className="flex-1 space-y-3 w-full">
+                    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 sm:gap-4">
+                      <div className="flex items-start gap-3">
+                        <div className="flex-shrink-0 sm:hidden">
+                          {getInsightIcon(insight.type)}
+                        </div>
+                        <div>
+                          <h3 className="font-semibold text-base sm:text-lg">{insight.title}</h3>
+                          <p className="text-sm text-muted-foreground mt-1">{insight.description}</p>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Badge variant="outline" className={getPriorityColor(insight.priority)}>
-                          {insight.priority} priority
-                        </Badge>
-                      </div>
+                      <Badge variant="outline" className={`${getPriorityColor(insight.priority)} w-fit text-xs whitespace-nowrap`}>
+                        {insight.priority} priority
+                      </Badge>
                     </div>
                     
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <span className="text-sm text-muted-foreground">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                      <div className="flex items-center gap-2 sm:gap-3">
+                        <span className="text-xs sm:text-sm text-muted-foreground">
                           AI Confidence: 
                         </span>
                         <div className="flex items-center gap-2">
-                          <div className="w-24 h-2 bg-muted rounded-full overflow-hidden">
+                          <div className="w-16 sm:w-24 h-1.5 sm:h-2 bg-muted rounded-full overflow-hidden">
                             <div 
                               className="h-full bg-gradient-to-r from-primary to-success transition-all duration-500"
                               style={{ width: `${insight.confidence}%` }}
                             />
                           </div>
-                          <span className="text-sm font-medium">{insight.confidence}%</span>
+                          <span className="text-xs sm:text-sm font-medium">{insight.confidence}%</span>
                         </div>
                       </div>
-                      <Button variant="outline" size="sm">
+                      <Button variant="outline" size="sm" className="w-fit text-xs sm:text-sm">
                         View Details
                       </Button>
                     </div>
@@ -161,8 +164,8 @@ export const AIInsights = () => {
           </div>
 
           <div className="text-center">
-            <Button variant="premium" size="lg" className="group" onClick={() => handleNavigation('/insights')}>
-              <MessageSquare className="w-5 h-5 mr-2" />
+            <Button variant="premium" size="lg" className="group text-sm sm:text-base" onClick={() => handleNavigation('/insights')}>
+              <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
               Chat with AI Advisor
               <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity">→</span>
             </Button>
