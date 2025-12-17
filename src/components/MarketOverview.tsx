@@ -60,45 +60,45 @@ const getChangeColor = (change: number) => {
 
 export const MarketOverview = () => {
   return (
-    <section className="py-16 px-4">
+    <section className="py-10 sm:py-12 md:py-16 px-4">
       <div className="container mx-auto max-w-6xl">
-        <div className="space-y-6">
-          <div className="flex items-center justify-between">
+        <div className="space-y-4 sm:space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
             <div>
-              <h2 className="text-3xl font-bold">Market Overview</h2>
-              <p className="text-muted-foreground mt-2">Real-time market data and trends</p>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">Market Overview</h2>
+              <p className="text-sm sm:text-base text-muted-foreground mt-1 sm:mt-2">Real-time market data and trends</p>
             </div>
-            <Badge variant="outline" className="border-primary/20 text-primary bg-primary/10">
+            <Badge variant="outline" className="border-primary/20 text-primary bg-primary/10 w-fit text-xs sm:text-sm">
               Live Data
             </Badge>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {mockMarketData.map((stock) => (
-              <Card key={stock.symbol} className="financial-card p-4 hover:border-primary/30 transition-all">
+              <Card key={stock.symbol} className="financial-card p-3 sm:p-4 hover:border-primary/30 transition-all">
                 <div className="flex items-start justify-between">
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <span className="font-bold text-lg">{stock.symbol}</span>
+                      <span className="font-bold text-base sm:text-lg">{stock.symbol}</span>
                       {getTrendIcon(stock.change)}
                     </div>
-                    <p className="text-sm text-muted-foreground truncate">{stock.name}</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground truncate max-w-[120px] sm:max-w-none">{stock.name}</p>
                   </div>
                   <div className="text-right">
-                    <p className="font-bold text-lg">${stock.price.toFixed(2)}</p>
+                    <p className="font-bold text-base sm:text-lg">${stock.price.toFixed(2)}</p>
                     <div className="flex items-center gap-1">
-                      <span className={`text-sm font-medium ${getChangeColor(stock.change)}`}>
+                      <span className={`text-xs sm:text-sm font-medium ${getChangeColor(stock.change)}`}>
                         {stock.change > 0 ? '+' : ''}{stock.change.toFixed(2)}
                       </span>
-                      <span className={`text-xs ${getChangeColor(stock.change)}`}>
+                      <span className={`text-[10px] sm:text-xs ${getChangeColor(stock.change)}`}>
                         ({stock.changePercent > 0 ? '+' : ''}{stock.changePercent.toFixed(2)}%)
                       </span>
                     </div>
                   </div>
                 </div>
                 {stock.volume && (
-                  <div className="mt-3 pt-3 border-t border-border/40">
-                    <p className="text-xs text-muted-foreground">
+                  <div className="mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-border/40">
+                    <p className="text-[10px] sm:text-xs text-muted-foreground">
                       Volume: <span className="font-medium">{stock.volume}</span>
                     </p>
                   </div>
