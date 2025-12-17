@@ -1,21 +1,21 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { TrendingUp, User, Menu, Bell } from "lucide-react";
+import { TrendingUp, User, Menu, Bell, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { NotificationsSidebar } from "@/components/NotificationsSidebar";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 
 export const Header = () => {
   const location = useLocation();
   const { toast } = useToast();
   const [notificationCount, setNotificationCount] = useState(3);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
-  // TODO: Replace with actual notification data from backend
   useEffect(() => {
-    // Mock notification data - would come from your backend
     const mockNotifications = [
       { id: '1', read: false },
       { id: '2', read: false },
@@ -27,7 +27,6 @@ export const Header = () => {
     const unreadCount = mockNotifications.filter(n => !n.read).length;
     setNotificationCount(unreadCount);
 
-    // Listen for notification updates
     const handleNotificationUpdate = (event: CustomEvent) => {
       setNotificationCount(event.detail.unreadCount);
     };
@@ -49,9 +48,15 @@ export const Header = () => {
   };
 
   const handleProfileClick = () => {
-    // Navigate to profile page
     window.location.href = '/profile';
   };
+
+  const navLinks = [
+    { path: '/dashboard', label: 'Dashboard' },
+    { path: '/portfolio', label: 'Portfolio' },
+    { path: '/insights', label: 'AI Insights' },
+    { path: '/news', label: 'News' },
+  ];
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -70,39 +75,19 @@ export const Header = () => {
           </Link>
         </div>
 
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
-          <Link 
-            to="/dashboard" 
-            className={`text-sm font-medium transition-colors ${
-              isActive('/dashboard') ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
-            }`}
-          >
-            Dashboard
-          </Link>
-          <Link 
-            to="/portfolio" 
-            className={`text-sm font-medium transition-colors ${
-              isActive('/portfolio') ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
-            }`}
-          >
-            Portfolio
-          </Link>
-          <Link 
-            to="/insights" 
-            className={`text-sm font-medium transition-colors ${
-              isActive('/insights') ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
-            }`}
-          >
-            AI Insights
-          </Link>
-          <Link 
-            to="/news" 
-            className={`text-sm font-medium transition-colors ${
-              isActive('/news') ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
-            }`}
-          >
-            News
-          </Link>
+          {navLinks.map((link) => (
+            <Link 
+              key={link.path}
+              to={link.path} 
+              className={`text-sm font-medium transition-colors ${
+                isActive(link.path) ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
         <div className="flex items-center gap-3">
@@ -115,15 +100,60 @@ export const Header = () => {
               </span>
             )}
           </Button>
-          <Button variant="ghost" size="icon" onClick={handleProfileClick}>
+          <Button variant="ghost" size="icon" className="hidden md:flex" onClick={handleProfileClick}>
             <User className="h-4 w-4" />
           </Button>
-          <Button variant="ghost" size="icon" className="md:hidden">
-            <Menu className="h-4 w-4" />
-          </Button>
+          
+          {/* Mobile Menu */}
+          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="md:hidden">
+                <Menu className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[280px] sm:w-[350px]">
+              <div className="flex flex-col h-full">
+                <div className="flex items-center justify-between mb-8">
+                  <div className="flex items-center gap-2">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-r from-primary to-accent">
+                      <TrendingUp className="h-5 w-5 text-primary-foreground" />
+                    </div>
+                    <span className="text-lg font-bold">CogniWealth</span>
+                  </div>
+                </div>
+                
+                <nav className="flex flex-col gap-2">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.path}
+                      to={link.path}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`px-4 py-3 rounded-lg text-base font-medium transition-colors ${
+                        isActive(link.path) 
+                          ? 'bg-primary/10 text-primary' 
+                          : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </nav>
+                
+                <div className="mt-auto pt-6 border-t border-border">
+                  <Link
+                    to="/profile"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center gap-3 px-4 py-3 rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+                  >
+                    <User className="h-5 w-5" />
+                    <span>Profile</span>
+                  </Link>
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
 
-        {/* Notifications Sidebar */}
         <NotificationsSidebar 
           open={showNotifications} 
           onClose={() => setShowNotifications(false)}
